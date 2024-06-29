@@ -2,17 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Navbar from './components/SideBar'
-import Header from './components/Header'
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import AppRoutes from "./AppRoutes";
 
 function App() {
-
   return (
-    <div className='w-screen h-screen'>
-      <Header />
-
+    <div className="w-screen h-screen">
+      <AppRoutes />
     </div>
-  )
+  );
 }
 
 export default App

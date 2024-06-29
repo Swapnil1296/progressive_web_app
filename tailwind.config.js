@@ -8,15 +8,15 @@ export default {
     extend: {
       screens: {
         'smallMobile':'360px',
-        'mobile': '480px',    // Custom name for mobile devices
-        'tablet': '640px',    // Custom name for tablets
-        'smallLaptop': '768px', // Custom name for small laptops
+        'mobile': '480px',
+        'tablet': '640px',
+        'smallLaptop': '768px', 
         'laptop': '1024px',
-       // Custom name for laptops
-        'desktop': '1280px',  // Custom name for desktops
+
+        'desktop': '1280px',  
         'largeDesktop': '1536px',
-         // Custom name for large desktops
-        'extraLargeDesktop': '1600px', // Custom name for extra large desktops
+
+        'extraLargeDesktop': '1600px', 
       },
     },
   },
