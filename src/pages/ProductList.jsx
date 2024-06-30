@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../Instance/axios";
+import Loader from "../utils/Loader";
 const ProductList = () => {
   const [product, setProducts] = useState();
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-
-        console.log(data);
-        setProducts(data);
+        setLoading(true);
+        const response = await axiosInstance.get(`/products`);
+        //setting product to local state
+        setProducts(response.data);
       } catch (error) {
         console.error("Fetch error:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchData();
+    fetchProduct();
   }, []);
+  if (loading) {
+    return <Loader />;
+  }
+  const handleItemClick = (id) => {
+    navigate(`/product/${id}`);
+  };
   return (
     <div>
       <div className="font-[sans-serif] bg-gray-100">
@@ -35,6 +43,7 @@ const ProductList = () => {
                   <div
                     key={item.id}
                     className="bg-white rounded-2xl p-5 cursor-pointer hover:-translate-y-2 transition-all relative"
+                    onClick={() => handleItemClick(item.id)}
                   >
                     <div className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
                       <IoIosHeartEmpty />
@@ -56,7 +65,7 @@ const ProductList = () => {
                         {item.description}
                       </p>
                       <h4 className="text-lg text-gray-800 font-bold mt-4">
-                        $10
+                        ₹{item.price}
                       </h4>
                     </div>
                   </div>
