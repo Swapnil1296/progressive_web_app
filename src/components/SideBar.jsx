@@ -14,37 +14,31 @@ const SideBar = ({ isOpen, setIsOpen }) => {
         placeholder="Search Your Next Product"
       />
       <NavLink
-        exact
         to="/"
-        activeClassName="bg-white text-black"
         className="text-white bg-black hover:bg-white hover:text-black rounded-full px-6 py-2 text-sm font-medium transition duration-250"
       >
         Home
       </NavLink>
       <NavLink
         to="/product-list"
-        activeClassName="bg-white text-black"
         className="text-white bg-black hover:bg-white hover:text-black rounded-full px-6 py-2 text-sm font-medium transition duration-250"
       >
         Products
       </NavLink>
       <NavLink
         to="/cart"
-        activeClassName="bg-white text-black"
         className="text-white bg-black hover:bg-white hover:text-black rounded-full px-6 py-2 text-sm font-medium transition duration-250"
       >
         My Cart
       </NavLink>
       <NavLink
         to="/wishlist"
-        activeClassName="bg-white text-black"
         className="text-white bg-black hover:bg-white hover:text-black rounded-full px-6 py-2 text-sm font-medium transition duration-250"
       >
         Wishlist
       </NavLink>
       <NavLink
         to="/contact-us"
-        activeClassName="bg-white text-black"
         className="text-white bg-black hover:bg-white hover:text-black rounded-full px-6 py-2 text-sm font-medium transition duration-250"
       >
         Contact Us

@@ -1,21 +1,12 @@
-// src/service-worker.js
-import CartPage from "./pages/CartPage";
-import ProductList from "./pages/ProductList";
-import SingleProductPage from "./pages/SingleProductPage";
-import WhishList from "./pages/WhishList";
-
 const CACHE_NAME = "my-app-cache-v1";
 
 const urlsToCache = [
   "/",
   "/index.html",
-  "/src/pages/CartPage",
-  "/src/pages/Home",
-  "/src/pages/Payment",
-  "/src/pages/ProductList",
-  "/src/pages/SingleProductPage",
-  "/src/pages/WhishList",
-
+  "/cart",
+  "/product-list",
+  "/product/:id",
+  "/wishlist",
   "https://fakestoreapi.com/products",
   "https://fakestoreapi.com/products/1",
   "https://fakestoreapi.com/products/2",
@@ -33,6 +24,11 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
+
+  // Check if the request URL has a scheme that is unsupported
+  if (request.url.startsWith("chrome-extension://")) {
+    return;
+  }
 
   // Handle requests for the base API endpoint
   if (request.url.startsWith("https://fakestoreapi.com/products")) {
@@ -55,7 +51,10 @@ self.addEventListener("fetch", (event) => {
 
           caches
             .open(CACHE_NAME)
-            .then((cache) => cache.put(request, responseToCache));
+            .then((cache) => cache.put(request, responseToCache))
+            .catch((error) => {
+              console.error("Failed to cache response:", error);
+            });
 
           return fetchResponse;
         });
@@ -76,7 +75,10 @@ self.addEventListener("fetch", (event) => {
 
         caches
           .open(CACHE_NAME)
-          .then((cache) => cache.put(request, responseToCache));
+          .then((cache) => cache.put(request, responseToCache))
+          .catch((error) => {
+            console.error("Failed to cache response:", error);
+          });
 
         return response;
       })

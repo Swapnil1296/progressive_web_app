@@ -7,8 +7,6 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // You can modify the request config before sending it
-    console.log("Request Interceptor:", config);
     return config;
   },
   (error) => {
@@ -20,8 +18,6 @@ axiosInstance.interceptors.request.use(
 // Response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
-    // You can modify the response data before returning it
-    console.log("Response Interceptor:", response);
     return response;
   },
   (error) => {
